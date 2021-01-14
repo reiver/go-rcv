@@ -4,6 +4,7 @@ import (
 	"github.com/reiver/go-rcv"
 
 	"io"
+	"math/big"
 	"strings"
 
 	"testing"
@@ -162,6 +163,85 @@ func TestFreadln_int64(t *testing.T) {
 			t.Errorf("For test #%d, the read line is not what was expected.", testNumber)
 			t.Logf("EXPECTED: %d", expected)
 			t.Logf("ACTUAL:   %d", actual)
+			continue
+		}
+	}
+}
+
+func TestFreadln_bigRat(t *testing.T) {
+	tests := []struct{
+		Input     string
+		Expected  *big.Rat
+		ExpectedN int
+	}{
+		{
+			//                                     line feed
+			Input:              "-12.3"+"\u000A"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u000A"),
+		},
+		{
+			//                                     vertical tab
+			Input:              "-12.3"+"\u000B"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u000B"),
+		},
+		{
+			//                                     form feed
+			Input:              "-12.3"+"\u000C"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u000C"),
+		},
+		{
+			//                                     carriage return
+			Input:              "-12.3"+"\u000D"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u000D"),
+		},
+		{
+			//                                     next line
+			Input:              "-12.3"+"\u0085"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u0085"),
+		},
+		{
+			//                                     line separator
+			Input:              "-12.3"+"\u2028"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u2028"),
+		},
+		{
+			//                                     paragraph separator
+			Input:              "-12.3"+"\u2029"+"one two three",
+			Expected: big.NewRat(-123,10),
+			ExpectedN :     len("-12.3"+"\u2029"),
+		},
+	}
+
+	for testNumber, test := range tests {
+
+		var reader io.Reader = strings.NewReader(test.Input)
+
+		var dst big.Rat
+		n, err := rcv.Freadln(reader, &dst)
+
+		if nil != err {
+			t.Errorf("For test #%d, received an error, but did not actually expect one.", testNumber)
+			t.Logf("ERROR: (%T) %q", err, err)
+			continue
+		}
+		if expected, actual := test.ExpectedN, n; expected != actual {
+			t.Errorf("For test #%d, the actual number of bytes read is not what was expected.", testNumber)
+			t.Logf("INPUT:    %q", test.Input)
+			t.Logf("BIG RAT:  %q", &dst)
+			t.Logf("EXPECTED: %d", expected)
+			t.Logf("ACTUAL:   %d", actual)
+			continue
+		}
+		if expected, actual := test.Expected, dst; 0 != expected.Cmp(&actual) {
+			t.Errorf("For test #%d, the read line is not what was expected.", testNumber)
+			t.Logf("EXPECTED: %q", expected)
+			t.Logf("ACTUAL:   %q", &actual)
 			continue
 		}
 	}

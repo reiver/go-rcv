@@ -36,6 +36,8 @@ func Freadln(reader io.Reader, dst interface{}) (n int, err error) {
 	case scanner:
 		err = casted.Scan(line)
 
+	case fmt.Scanner:
+		_, err = fmt.Sscan(line, casted)
 
 	case *string:
 		*casted = line
