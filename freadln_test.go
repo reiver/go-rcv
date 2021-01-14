@@ -74,7 +74,7 @@ func TestFreadln_string(t *testing.T) {
 		if expected, actual := test.ExpectedN, n; expected != actual {
 			t.Errorf("For test #%d, the actual number of bytes read is not what was expected.", testNumber)
 			t.Logf("INPUT:     %q", test.Input)
-			t.Logf("RESD LINE: %q", dst)
+			t.Logf("READ LINE: %q", dst)
 			t.Logf("EXPECTED: %d", expected)
 			t.Logf("ACTUAL:   %d", actual)
 			continue
@@ -153,7 +153,7 @@ func TestFreadln_int64(t *testing.T) {
 		if expected, actual := test.ExpectedN, n; expected != actual {
 			t.Errorf("For test #%d, the actual number of bytes read is not what was expected.", testNumber)
 			t.Logf("INPUT:     %q", test.Input)
-			t.Logf("RESD LINE: %q", dst)
+			t.Logf("READ LINE: %q", dst)
 			t.Logf("EXPECTED: %d", expected)
 			t.Logf("ACTUAL:   %d", actual)
 			continue
