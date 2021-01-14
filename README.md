@@ -14,7 +14,7 @@ Here is an example usage:
 ```Go
 var line string
 
-rcv.Readlne(&dst)
+rcv.Readln(&dst)
 
 fmt.Printf("LINE: %q\n", line)
 ```
