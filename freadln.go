@@ -1,7 +1,7 @@
 package rcv
 
 import (
-	"github.com/reiver/go-utf8s"
+	"github.com/reiver/go-utf8"
 	"github.com/reiver/go-whitespace"
 
 	"fmt"
@@ -17,7 +17,7 @@ func Freadln(reader io.Reader, dst interface{}) (n int, err error) {
 	var buffer strings.Builder
 
 	for {
-		r, size, err := utf8s.ReadRune(reader)
+		r, size, err := utf8.ReadRune(reader)
 		n += size
 		if nil != err {
 			return n, err
