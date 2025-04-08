@@ -1,0 +1,4 @@
+github.com/reiver/go-utf8 v2.0.2-0.20240825112455-f6c2bd439d4f+incompatible h1:UnOzxDADv3uDI9QB8xh3ZAAmnaWyp7NlV2ny7K8FlG0=
+github.com/reiver/go-utf8 v2.0.2-0.20240825112455-f6c2bd439d4f+incompatible/go.mod h1:tfGntNDUeEZIAsz0mTu0lF7/IlErc+BpQgO6yxYmJig=
+github.com/reiver/go-whitespace v1.0.0 h1:+xRDKXwKWK8VtVnICxh/iSk1iKu2GxfisZTV3sOG/rI=
+github.com/reiver/go-whitespace v1.0.0/go.mod h1:sJJrL83SlvhKTkFke2C7T8Zq5JgiLS344l28c4RLUyc=
