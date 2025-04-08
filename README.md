@@ -18,3 +18,21 @@ rcv.Readln(&dst)
 
 fmt.Printf("LINE: %q\n", line)
 ```
+
+## Import
+
+To import package **rcv** use `import` code like the following:
+```
+import "github.com/reiver/go-rcv"
+```
+
+## Installation
+
+To install package **rcv** do the following:
+```
+GOPROXY=direct go get github.com/reiver/go-rcv
+```
+
+## Author
+
+Package **rcv** was written by [Charles Iliya Krempeaux](http://reiver.link)
